@@ -72,10 +72,10 @@ public:
         first=nullptr;
         last=nullptr;
     }
-    Polynomial(Term Slay){
+    Polynomial(Term initial){
         Polynomial();
-        Term* Hero = new Term(Slay);
-        this->add(Hero);
+        Term* copy = new Term(initial);
+        this->add(copy);
 //        first=&Slay;
 //        last=&Slay;
 //        Slay.previous=nullptr;
@@ -86,22 +86,28 @@ public:
 //    Iterator erase(Iterator iter);
 //    Iterator begin();
 //    Iterator end();
-    void add(Term Jill){
-        this->add(&Jill);
+    void add(Term term_obj){
+        Term* term_copy = new Term(term_obj);
+        this->add(term_copy);
     }
-    void add(Term* John){
-        Term *temp=last;
+    void add(Term* to_add){
+        Term *temp=last; // Stash the last pointer into a temp variable
+        // If the first entry is a null pointer, make this Term the first term
         if(first==nullptr){
-            first=John;
-        } else {
-            last->next=John;
+            first=to_add;
         }
-        last=John;
-        John->previous=temp;
-        John->next=nullptr;
+        // Otherwise, take the existing latest pointer and update it to point to to_add as its next Term
+        else {
+            last->next=to_add;
+        }
+        // Set the Polynomial's last entry to be to_add
+        last=to_add;
+        // Update to_add to be the end of the list
+        to_add->previous=temp;
+        to_add->next=nullptr;
         
         //TODO: Add coefficients if Term w/new term's power already exists within polynomial
-        //if (John.power==new John ){
+        //if (to_add.power==new to_add ){
         //  ...
         //}
     }
@@ -143,10 +149,11 @@ public:
 
 int main(){
     Polynomial p(Term(-2, 0));//p=-2
-    //p.print();
+    p.print();
     p.add(Term(1, 1));//p=x-2
     p.print();
-    // p.add(Term(2, 2));//p=2*x^2+x-2
+    p.add(Term(2, 2));//p=2*x^2+x-2
+    p.print();
     // Polynomial q(Term(2, 0));//q=2
     // q.add(Term(-1, 1));//q=-x+2
     // q.add(Term(1, 3));//q=x^3-x+2
