@@ -1,6 +1,3 @@
-//
-//
-//
 #include<sstream>
 #include<iomanip>
 #include <string>
@@ -18,26 +15,7 @@
 
 using namespace std;
 
-//class Term {
-//public:
-//    int data;
-//    int data2;
-//    Term* next;
-//
-//    // Default constructor
-//    Term()
-//    {
-//        data = 0;
-//        next = NULL;
-//    }
-//
-//    // Parameterised Constructor
-//    Term(int data, int data2)
-//    {
-//        this->data = data;
-//        this->next = NULL;
-//    }
-//};
+
 class Iterator;
 class List;
 
@@ -72,8 +50,7 @@ public:
         first=nullptr;
         last=nullptr;
     }
-    Polynomial(Term initial){
-        Polynomial();
+    Polynomial(Term initial):Polynomial(){
         Term* copy = new Term(initial);
         this->add(copy);
 //        first=&Slay;
@@ -106,25 +83,38 @@ public:
         to_add->previous=temp;
         to_add->next=nullptr;
         
+        
+        
         //TODO: Add coefficients if Term w/new term's power already exists within polynomial
-        //if (to_add.power==new to_add ){
-        //  ...
-        //}
+        if (to_add->power==new to_add->power ){
+          
+        }
     }
     Polynomial addition(Polynomial Ringo){
+        //merge sort will go here
+        //putting together two polynomials just requires the melding of like terms and making them in order based on the size of the coefficients
         return Ringo; //TODO: make this do addition
     }
-    void print(Term Paul); //make print
+//    void print(Term Paul){
+//        Polynomial
+//    }
+    //make print
     void print(){
+        
         Term* my_next = first;
         for (int i = 0 ; ; i++){
             if (my_next==nullptr){
                 break;
             }
-            cout << "Position " << i << " Address: " << my_next << endl;
-            cout << "Position " << i << " Coefficient: " << my_next->get_coefficient()<< endl;
-            cout << "Position " << i << " Power: " << my_next->get_power()<< endl;
-            my_next = my_next->get_next();
+            cout<<
+//            cout << "Position " << i << " Address: " << my_next << endl;
+            my_next->get_coefficient();
+           
+                
+            }
+           // << endl;
+        cout << "Position " << i << " Power: " << my_next->get_power()<< endl;
+        my_next = my_next->get_next();
         }
     }; //make print
     
@@ -149,16 +139,16 @@ public:
 
 int main(){
     Polynomial p(Term(-2, 0));//p=-2
-    p.print();
+   // p.print();
     p.add(Term(1, 1));//p=x-2
-    p.print();
+  //  p.print();
     p.add(Term(2, 2));//p=2*x^2+x-2
-    p.print();
-    // Polynomial q(Term(2, 0));//q=2
-    // q.add(Term(-1, 1));//q=-x+2
-    // q.add(Term(1, 3));//q=x^3-x+2
-  //  Polynomial h=p.addition(p);
-   // h.print();
+    //p.print();
+    Polynomial q(Term(2, 0));//q=2
+    q.add(Term(-1, 1));//q=-x+2
+    q.add(Term(1, 3));//q=x^3-x+2
+    Polynomial h=p.addition(p);
+    h.print();
   //  h=p.addition(q);
   //  h.print();
     cout<<"Helen Morris, 3-12-2023"<<endl;
