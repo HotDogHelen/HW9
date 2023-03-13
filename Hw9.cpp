@@ -1,6 +1,3 @@
-//
-//
-//
 #include<sstream>
 #include<iomanip>
 #include <string>
@@ -8,7 +5,7 @@
 #include <vector>
 #include<fstream>
 #include<numeric>
-//#include <cmath>
+#include <cmath>
 //#include<iterator>
 
 #include <chrono>
@@ -18,26 +15,7 @@
 
 using namespace std;
 
-//class Term {
-//public:
-//    int data;
-//    int data2;
-//    Term* next;
-//
-//    // Default constructor
-//    Term()
-//    {
-//        data = 0;
-//        next = NULL;
-//    }
-//
-//    // Parameterised Constructor
-//    Term(int data, int data2)
-//    {
-//        this->data = data;
-//        this->next = NULL;
-//    }
-//};
+
 class Iterator;
 class List;
 
@@ -72,8 +50,7 @@ public:
         first=nullptr;
         last=nullptr;
     }
-    Polynomial(Term initial){
-        Polynomial();
+    Polynomial(Term initial):Polynomial(){
         Term* copy = new Term(initial);
         this->add(copy);
 //        first=&Slay;
@@ -105,60 +82,85 @@ public:
         // Update to_add to be the end of the list
         to_add->previous=temp;
         to_add->next=nullptr;
-        
-        //TODO: Add coefficients if Term w/new term's power already exists within polynomial
-        //if (to_add.power==new to_add ){
-        //  ...
-        //}
     }
+        //TODO: Add coefficients if Term w/new term's power already exists within polynomial
+   //     if (to_add->power==new to_add->power ){
+          
+     //   }
+
     Polynomial addition(Polynomial Ringo){
+        //merge sort will go here
+        //putting together two polynomials just requires the melding of like terms and making them in order based on the size of the coefficients
         return Ringo; //TODO: make this do addition
     }
-    void print(Term Paul); //make print
+//    void print(Term Paul){
+//        Polynomial
+//    }
+    //make print
     void print(){
-        Term* my_next = first;
-        for (int i = 0 ; ; i++){
-            if (my_next==nullptr){
-                break;
+        int temp;
+        int powtemp;
+
+        for (Term* my_next = first; my_next!=nullptr; my_next = my_next->get_next()){
+            temp=my_next->get_coefficient();
+            powtemp=my_next->get_power();
+            string signstring="+";
+            string xholder="";
+            string coeffictemp=to_string(abs(temp));
+            if(temp<0){
+                 signstring="-";
+            }else if(my_next==first){
+                signstring="";
             }
-            cout << "Position " << i << " Address: " << my_next << endl;
-            cout << "Position " << i << " Coefficient: " << my_next->get_coefficient()<< endl;
-            cout << "Position " << i << " Power: " << my_next->get_power()<< endl;
-            my_next = my_next->get_next();
+            if(powtemp>0){
+                xholder="*x^"+to_string(powtemp);
+            }
+            else if(powtemp==1){
+                xholder="*x";
+            }
+            if(temp==1){
+                coeffictemp="x";
+                xholder="";
+            }
+            cout<<signstring<<coeffictemp<<xholder;
+            
+           }
+        cout<<endl;
+        
         }
-    }; //make print
+     //make print
     
     private:
     Term* first;
     Term* last;
     friend class Iterator;
 };
-//class Iterator
-//{
-//    public:
-//    Iterator();
-//    string get() const;
-//    void next();
-//    void previous();
-//    bool equals(Iterator other) const;
-//    private:
-//    Term* position;
-//    Polynomial* container;
-//    friend class Polynomial;
-//};
+class Iterator
+{
+    public:
+    Iterator();
+    string get() const;
+    void next();
+    void previous();
+    bool equals(Iterator other) const;
+    private:
+    Term* position;
+    Polynomial* container;
+    friend class Polynomial;
+};
 
 int main(){
     Polynomial p(Term(-2, 0));//p=-2
-    p.print();
+   // p.print();
     p.add(Term(1, 1));//p=x-2
-    p.print();
+  //  p.print();
     p.add(Term(2, 2));//p=2*x^2+x-2
-    p.print();
-    // Polynomial q(Term(2, 0));//q=2
-    // q.add(Term(-1, 1));//q=-x+2
-    // q.add(Term(1, 3));//q=x^3-x+2
-  //  Polynomial h=p.addition(p);
-   // h.print();
+    //p.print();
+    Polynomial q(Term(2, 0));//q=2
+    q.add(Term(-1, 1));//q=-x+2
+    q.add(Term(1, 3));//q=x^3-x+2
+    //Polynomial h=p.addition(p);
+    h.print();
   //  h=p.addition(q);
   //  h.print();
     cout<<"Helen Morris, 3-12-2023"<<endl;
